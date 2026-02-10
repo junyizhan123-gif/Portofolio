@@ -5,228 +5,241 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yizzy | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #e9b91b;
-      --accent: #62504f;
-      --text: #f7f7ff;
-      --muted: #9a99a6;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: linear-gradient(
-        to bottom,
-        rgba(5, 6, 8, 0.95),
-        rgba(5, 6, 8, 0.85),
-        transparent
-      );
-      backdrop-filter: blur(12px);
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 0;
-    }
-    nav ul {
-      display: flex;
-      gap: 18px;
-      list-style: none;
-      font-size: 0.9rem;
-    }
-    nav a:hover {
-      color: var(--accent);
-    }
-    .logo {
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-    }
-    main {
-      padding: 40px 0 80px;
-    }
-    section {
-      padding: 60px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-    section:last-of-type {
-      border-bottom: none;
-    }
-    .section-title {
-      font-size: 1.25rem;
-      margin-bottom: 20px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #7a7a7a;
+    --line: #e6e6e6;
+    --hover: #b0b0b0;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  a:hover {
+    border-color: var(--hover);
+    color: var(--hover);
+  }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header / Nav */
+
+  header {
+    border-bottom: 1px solid var(--line);
+    background: #fff;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+  }
+
+  .logo {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    font-size: 13px;
+  }
+
+  nav a {
+    color: var(--muted);
+  }
+
+  nav a:hover {
+    color: var(--text);
+  }
+
+  /* Sections */
+
+  main {
+    padding: 60px 0;
+  }
+
+  section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  section:last-of-type {
+    border-bottom: none;
+  }
+
+  .section-title {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+
+  /* Hero */
+
+  .hero {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    max-width: 520px;
+    color: var(--muted);
+  }
+
+  .chip-row {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .hero-card {
+    border-left: 2px solid var(--line);
+    padding-left: 20px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* Cards */
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-tag {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .card-meta {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* Video */
+
+  .embed-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #f5f5f5;
+    margin-top: 12px;
+  }
+
+  .embed-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Audio */
+
+  .audio-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  audio {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  /* Contact */
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 14px;
+  }
+
+  .contact-item span {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* Footer */
+
+  footer {
+    padding: 40px 0 20px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* Mobile */
+
+  @media (max-width: 768px) {
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      grid-template-columns: 1fr;
       gap: 40px;
-      align-items: center;
-      padding-top: 20px;
     }
-    .hero h1 {
-      font-size: 2.2rem;
-      margin-bottom: 12px;
-    }
-    .hero p {
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-    .tagline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(242, 95, 92, 0.1);
-      color: var(--accent);
-      font-size: 0.8rem;
-      margin-bottom: 12px;
-    }
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .chip {
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 4px 10px;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .hero-card {
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 20px;
-      background: radial-gradient(circle at 0 0, rgba(242, 95, 92, 0.3), transparent 55%);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
-    }
-    .hero-card-title {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-    .hero-card-main {
-      font-size: 1rem;
-      margin-bottom: 10px;
-    }
-    .hero-card-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 16px;
-      background: rgba(255, 255, 255, 0.01);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .card-tag {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .card-title {
-      font-size: 1rem;
-      font-weight: 500;
-    }
-    .card-meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    .embed-wrapper {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #111;
-      margin-top: 6px;
-    }
-    .embed-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-    .audio-list {
-      display: flex;
-      flex-direction: column;
+
+    nav ul {
       gap: 14px;
     }
-    .audio-item-title {
-      font-size: 0.95rem;
-    }
-    audio {
-      width: 100%;
-      margin-top: 4px;
-    }
-    .contact-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      font-size: 0.9rem;
-    }
-    .contact-item span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.75rem;
-      margin-bottom: 2px;
-    }
-    .contact-item a {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    footer {
-      padding: 20px 0 40px;
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-align: center;
-    }
-    @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-      header {
-        position: static;
-      }
-    }
-  </style>
+  }
+</style>
+
 </head>
 <body>
   <header>
