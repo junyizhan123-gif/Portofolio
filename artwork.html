@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yizzy | Art Work</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #1c1c1c;
+      --header-footer: #090909;
+      --panel: #262626;
+      --gold: #e9b91b;
+      --gold-dim: rgba(233, 185, 27, 0.1);
+      --gold-border: rgba(233, 185, 27, 0.18);
+      --text: #e0e0e0;
+      --muted: #8c8c8c;
+      --line: rgba(255, 255, 255, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 9, 9, 0.95);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      font-size: 13px;
+    }
+
+    nav a { color: var(--muted); transition: color 0.2s; }
+    nav a:hover { color: var(--gold); }
+
+    main { padding: 80px 0; min-height: 70vh; }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .section-heading {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 36px;
+      color: var(--text);
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .work-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-radius: 18px;
+      border: 1px solid var(--gold-border);
+      padding: 26px;
+      background: var(--panel);
+      transition: border-color 0.22s, transform 0.22s;
+      cursor: pointer;
+    }
+
+    .work-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .work-card-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .work-card-title { font-size: 20px; font-weight: 500; }
+
+    .work-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .work-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--gold);
+      margin-top: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .work-card-cta::after { content: "→"; }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--header-footer);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 768px) {
+      nav ul { gap: 14px; font-size: 12px; }
+      .works-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Yizzy's Sonic Space</div>
+        <ul>
+          <li><a href="index.html#bio">Bio</a></li>
+          <li><a href="index.html#reel">Sound Design</a></li>
+          <li><a href="index.html#music">Music</a></li>
+          <li><a href="index.html#performance">Performance</a></li>
+          <li><a href="artwork.html">Art Work</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="artwork">
+      <div class="container">
+        <div class="section-label">Art Work</div>
+        <div class="section-heading">Selected Projects</div>
+        <div class="works-grid">
+
+          <a class="work-card" href="https://www.imdb.com/title/tt28002849/?ref_=nm_ov_bio_lk" target="_blank" rel="noopener">
+            <div class="work-card-tag">Film · Sound Design</div>
+            <div class="work-card-title">TIDE</div>
+            <div class="work-card-desc">
+              Exhibited at the 2023 TIDE London Contemporary Art Exhibition. An immersive work
+              exploring the intersection of sound, motion, and visual narrative.
+            </div>
+            <span class="work-card-cta">View on IMDB</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Yizzy's Sonic Space. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
