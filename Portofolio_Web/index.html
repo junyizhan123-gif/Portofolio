@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,17 +8,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0a0a08;
-      --panel: #141410;
+      --bg: #1c1c1c;
+      --header-footer: #090909;
+      --panel: #262626;
       --gold: #e9b91b;
       --gold-dim: rgba(233, 185, 27, 0.1);
       --gold-border: rgba(233, 185, 27, 0.18);
-      --text: #f0ede6;
-      --muted: #7a7874;
-      --line: rgba(255, 255, 255, 0.06);
+      --text: #e0e0e0;
+      --muted: #8c8c8c;
+      --line: rgba(255, 255, 255, 0.05);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: "Inter", system-ui, -apple-system, sans-serif;
@@ -27,7 +33,10 @@
       font-size: 15px;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     .container {
       max-width: 960px;
@@ -39,7 +48,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(10, 10, 8, 0.9);
+      background: rgba(9, 9, 9, 0.95);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--line);
@@ -67,17 +76,33 @@
       font-size: 13px;
     }
 
-    nav a { color: var(--muted); transition: color 0.2s; }
-    nav a:hover { color: var(--gold); }
-
-    main { padding-bottom: 80px; }
-
-    section {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--line);
+    nav a {
+      color: var(--muted);
+      transition: color 0.2s;
     }
 
-    section:last-of-type { border-bottom: none; }
+    nav a:hover, nav a.active {
+      color: var(--gold);
+    }
+
+    main {
+      padding-bottom: 80px;
+    }
+
+    .page-section {
+      display: none;
+      padding: 40px 0 80px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     .section-label {
       font-size: 11px;
@@ -128,7 +153,11 @@
       margin-bottom: 26px;
     }
 
-    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
     .chip {
       border: 1px solid var(--gold-border);
@@ -178,12 +207,14 @@
       border: 1px solid var(--line);
     }
 
-    .embed-wrapper iframe {
+    .embed-wrapper iframe,
+    .embed-wrapper video {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       border: 0;
+      background: #000;
     }
 
     .embed-caption {
@@ -199,9 +230,19 @@
       background: var(--panel);
     }
 
-    .music-link-row { margin-top: 16px; font-size: 13px; }
-    .music-link-row a { color: var(--gold); transition: opacity 0.2s; }
-    .music-link-row a:hover { opacity: 0.75; }
+    .music-link-row {
+      margin-top: 16px;
+      font-size: 13px;
+    }
+
+    .music-link-row a {
+      color: var(--gold);
+      transition: opacity 0.2s;
+    }
+
+    .music-link-row a:hover {
+      opacity: 0.75;
+    }
 
     .works-grid {
       display: grid;
@@ -233,7 +274,10 @@
       color: var(--gold);
     }
 
-    .work-card-title { font-size: 20px; font-weight: 500; }
+    .work-card-title {
+      font-size: 20px;
+      font-weight: 500;
+    }
 
     .work-card-desc {
       font-size: 13px;
@@ -252,10 +296,21 @@
       letter-spacing: 0.04em;
     }
 
-    .work-card-cta::after { content: "→"; }
+    .work-card-cta::after {
+      content: "→";
+    }
 
-    .contact-grid { display: flex; flex-direction: column; gap: 22px; }
-    .contact-item { display: flex; flex-direction: column; gap: 4px; }
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
 
     .contact-label {
       font-size: 11px;
@@ -264,26 +319,125 @@
       color: var(--gold);
     }
 
-    .contact-item a { font-size: 14px; color: var(--muted); transition: color 0.2s; }
-    .contact-item a:hover { color: var(--text); }
+    .contact-item a {
+      font-size: 14px;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .contact-item a:hover {
+      color: var(--text);
+    }
 
     footer {
       padding: 32px 0;
       text-align: center;
       font-size: 12px;
       color: var(--muted);
+      background: var(--header-footer);
       border-top: 1px solid var(--line);
     }
 
+    .bio-photos-panel {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 60px;
+      padding: 26px;
+      background: var(--panel);
+      border-radius: 18px;
+      border: 1px solid var(--gold-border);
+    }
+
+    .bio-photo {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 12px;
+      filter: grayscale(100%) contrast(1.1) brightness(0.5);
+      transition: filter 0.4s ease;
+    }
+
+    .bio-photo:hover {
+      filter: grayscale(0%) contrast(1) brightness(1);
+    }
+
+    .tabs-nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+      border-color: var(--gold-border);
+    }
+
+    .tab-btn.active {
+      color: var(--gold);
+      background: var(--gold-dim);
+      border-color: var(--gold);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
     @media (max-width: 768px) {
-      .hero { grid-template-columns: 1fr; gap: 32px; padding-top: 28px; }
-      .hero-name { font-size: 34px; }
-      nav ul { gap: 14px; font-size: 12px; }
-      .works-grid { grid-template-columns: 1fr; }
-      section { padding: 60px 0; }
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding-top: 28px;
+      }
+
+      .bio-photos-panel {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 16px;
+      }
+
+      .bio-photo {
+        height: 320px;
+      }
+
+      .hero-name {
+        font-size: 34px;
+      }
+
+      nav ul {
+        gap: 14px;
+        font-size: 12px;
+        flex-wrap: wrap;
+      }
+
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 60px 0;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -291,11 +445,12 @@
       <nav>
         <div class="logo">Yizzy's Sonic Space</div>
         <ul>
-          <li><a href="#bio">Bio</a></li>
-          <li><a href="#reel">Demo Reel</a></li>
-          <li><a href="#music">Music</a></li>
-          <li><a href="#works">Works</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#bio" class="nav-link active" onclick="openPage(event, 'bio')">Bio</a></li>
+          <li><a href="#reel" class="nav-link" onclick="openPage(event, 'reel')">Sound Design</a></li>
+          <li><a href="#music" class="nav-link" onclick="openPage(event, 'music')">Music</a></li>
+          <li><a href="#performance" class="nav-link" onclick="openPage(event, 'performance')">Performance</a></li>
+          <li><a href="#artwork" class="nav-link" onclick="openPage(event, 'artwork')">Art Work</a></li>
+          <li><a href="#contact" class="nav-link" onclick="openPage(event, 'contact')">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -303,7 +458,7 @@
 
   <main>
 
-    <section id="bio">
+    <section id="bio" class="page-section active">
       <div class="container hero">
         <div>
           <div class="hero-tagline">Performer · Music Creator · Storyteller</div>
@@ -338,39 +493,94 @@
           </div>
         </div>
       </div>
-    </section>
 
-    <section id="reel">
       <div class="container">
-        <div class="section-label">Sound Design</div>
-        <div class="section-heading">Demo Reel</div>
-        <div class="embed-wrapper">
-          <iframe
-            src="https://www.youtube.com/embed/q6byMRGv9uo"
-            title="IMAF 2025 — Sound Design Work by Yizzy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-        <div class="embed-caption">
-          Exhibited at the 27th International Multimedial Art Festival (IMAF) 2025 · Electronic / Experimental
+        <div class="bio-photos-panel">
+          <img src="media/photo1.jpg" alt="Bio Photo 1" class="bio-photo">
+          <img src="media/photo2.jpg" alt="Bio Photo 2" class="bio-photo">
+          <img src="media/photo3.jpg" alt="Bio Photo 3" class="bio-photo">
         </div>
       </div>
     </section>
 
-    <section id="music">
+    <section id="reel" class="page-section">
+      <div class="container">
+        <div class="section-label">Sound Design</div>
+        <div class="section-heading">Projects & Demo Reel</div>
+        <!-- Tab Navigation -->
+        <div class="tabs-nav">
+          <button class="tab-btn active" onclick="openTab(event, 'tab-demo-reel')">Demo Reel</button>
+          <button class="tab-btn" onclick="openTab(event, 'tab-sound-redesign')">Sound Redesign</button>
+          <button class="tab-btn" onclick="openTab(event, 'tab-project')">Project</button>
+        </div>
+
+        <!-- Tab Content: Demo Reel -->
+        <div id="tab-demo-reel" class="tab-content active">
+          <div class="works-grid" style="grid-template-columns: 1fr;">
+            <div>
+              <div class="embed-wrapper">
+                <video controls src="media/demo_reel_2026.mp4">
+                  您的浏览器不支持 HTML5 视频。
+                </video>
+              </div>
+              <div class="embed-caption">
+                Sound Design Demo Reel
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Content: Sound Redesign -->
+        <div id="tab-sound-redesign" class="tab-content">
+          <div class="works-grid">
+            <div>
+              <div class="embed-wrapper">
+                <video controls src="media/Kongfu_panda.mp4">
+                  您的浏览器不支持 HTML5 视频。
+                </video>
+              </div>
+              <div class="embed-caption">
+                Kung Fu Panda · Sound Redesign
+              </div>
+            </div>
+            <div>
+              <div class="embed-wrapper">
+                <video controls src="media/shadow.mp4">
+                  您的浏览器不支持 HTML5 视频。
+                </video>
+              </div>
+              <div class="embed-caption">
+                Shadow · Sound Redesign
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Content: Project -->
+        <div id="tab-project" class="tab-content">
+          <div class="works-grid" style="grid-template-columns: 1fr;">
+            <div>
+              <div class="embed-wrapper">
+                <iframe src="https://www.youtube.com/embed/00mFUB37Bik" title="Myth of Lumi"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+              </div>
+              <div class="embed-caption">
+                Myth of Lumi · Game Music & Sound
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="music" class="page-section">
       <div class="container">
         <div class="section-label">Music</div>
         <div class="section-heading">Tracks & Productions</div>
         <div class="soundcloud-wrapper">
-          <iframe
-            width="100%"
-            height="450"
-            scrolling="no"
-            frameborder="no"
-            allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/johnny-zhan&color=%23e9b91b&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
-          ></iframe>
+          <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/johnny-zhan&color=%23e9b91b&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>
         </div>
         <div class="music-link-row">
           Full profile on SoundCloud →
@@ -381,10 +591,38 @@
       </div>
     </section>
 
-    <section id="works">
+    <section id="performance" class="page-section">
       <div class="container">
-        <div class="section-label">Selected Works</div>
-        <div class="section-heading">Projects</div>
+        <div class="section-label">Performance</div>
+        <div class="section-heading">Live & Exhibitions</div>
+
+        <div class="works-grid">
+          <a class="work-card" href="https://youtu.be/q6byMRGv9uo?si=6fVO9XolqDdj52Pm" target="_blank" rel="noopener">
+            <div class="work-card-tag">Electronic / Experimental</div>
+            <div class="work-card-title">IMAF 2025</div>
+            <div class="work-card-desc">
+              Exhibited at the 27th International Multimedial Art Festival (IMAF) 2025. Sound Design Work by Yizzy.
+            </div>
+            <span class="work-card-cta">Watch on YouTube</span>
+          </a>
+
+          <a class="work-card" href="https://youtu.be/aeAeApuMCyU?si=4wNp6NEes8xzfmph" target="_blank" rel="noopener">
+            <div class="work-card-tag">Guqin Performance</div>
+            <div class="work-card-title">神人畅 (Shen Ren Chang)</div>
+            <div class="work-card-desc">
+              Traditional Guqin performance showcasing classical techniques and aesthetic expression.
+            </div>
+            <span class="work-card-cta">Watch on YouTube</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="artwork" class="page-section">
+      <div class="container">
+        <div class="section-label">Art Work</div>
+        <div class="section-heading">Selected Projects</div>
         <div class="works-grid">
 
           <a class="work-card" href="https://www.imdb.com/title/tt28002849/?ref_=nm_ov_bio_lk" target="_blank" rel="noopener">
@@ -397,21 +635,11 @@
             <span class="work-card-cta">View on IMDB</span>
           </a>
 
-          <a class="work-card" href="https://store.steampowered.com/app/3518380/Myth_of_Lumi/" target="_blank" rel="noopener">
-            <div class="work-card-tag">Game · Music & Sound</div>
-            <div class="work-card-title">Myth of Lumi</div>
-            <div class="work-card-desc">
-              Original music composition and sound design for an independent game title.
-              Now available on Steam.
-            </div>
-            <span class="work-card-cta">View on Steam</span>
-          </a>
-
         </div>
       </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="page-section">
       <div class="container">
         <div class="section-label">Get in Touch</div>
         <div class="section-heading">Contact</div>
@@ -419,6 +647,11 @@
           <div class="contact-item">
             <span class="contact-label">Email</span>
             <a href="mailto:junyizhan123@gmail.com">junyizhan123@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/junyi-zhan-5a6b74262/" target="_blank"
+              rel="noopener">linkedin.com/in/junyi-zhan-5a6b74262/</a>
           </div>
           <div class="contact-item">
             <span class="contact-label">SoundCloud</span>
@@ -442,7 +675,64 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    function openPage(evt, pageId) {
+      evt.preventDefault();
+      
+      var pages = document.getElementsByClassName("page-section");
+      for (var i = 0; i < pages.length; i++) {
+        pages[i].classList.remove("active");
+        
+        var videos = pages[i].getElementsByTagName("video");
+        for (var j = 0; j < videos.length; j++) {
+          videos[j].pause();
+        }
+        
+        var iframes = pages[i].getElementsByTagName("iframe");
+        for (var k = 0; k < iframes.length; k++) {
+          var src = iframes[k].src;
+          iframes[k].src = src; 
+        }
+      }
+
+      var navLinks = document.getElementsByClassName("nav-link");
+      for (var i = 0; i < navLinks.length; i++) {
+        navLinks[i].classList.remove("active");
+      }
+
+      document.getElementById(pageId).classList.add("active");
+      evt.currentTarget.classList.add("active");
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openTab(evt, tabId) {
+      var tabContents = document.getElementsByClassName("tab-content");
+      for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+        
+        var videos = tabContents[i].getElementsByTagName("video");
+        for (var j = 0; j < videos.length; j++) {
+          videos[j].pause();
+        }
+        
+        var iframes = tabContents[i].getElementsByTagName("iframe");
+        for (var k = 0; k < iframes.length; k++) {
+          var src = iframes[k].src;
+          iframes[k].src = src; 
+        }
+      }
+
+      var tabBtns = document.getElementsByClassName("tab-btn");
+      for (var i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].classList.remove("active");
+      }
+
+      document.getElementById(tabId).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
   </script>
 
 </body>
+
 </html>
