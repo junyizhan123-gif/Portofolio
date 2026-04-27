@@ -1,408 +1,738 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yizzy | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <title>Yizzy | Sonic Space</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #e9b91b;
-      --accent: #62504f;
-      --text: #f7f7ff;
-      --muted: #9a99a6;
+      --bg: #1c1c1c;
+      --header-footer: #090909;
+      --panel: #262626;
+      --gold: #e9b91b;
+      --gold-dim: rgba(233, 185, 27, 0.1);
+      --gold-border: rgba(233, 185, 27, 0.18);
+      --text: #e0e0e0;
+      --muted: #8c8c8c;
+      --line: rgba(255, 255, 255, 0.05);
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 15px;
     }
+
     a {
       color: inherit;
       text-decoration: none;
     }
+
     .container {
       max-width: 960px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 24px;
     }
+
     header {
       position: sticky;
       top: 0;
-      z-index: 10;
-      background: linear-gradient(
-        to bottom,
-        rgba(5, 6, 8, 0.95),
-        rgba(5, 6, 8, 0.85),
-        transparent
-      );
-      backdrop-filter: blur(12px);
+      z-index: 100;
+      background: rgba(9, 9, 9, 0.95);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
     }
+
     nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 0;
+      padding: 18px 0;
     }
+
+    .logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
     nav ul {
       display: flex;
-      gap: 18px;
+      gap: 24px;
       list-style: none;
-      font-size: 0.9rem;
+      font-size: 13px;
     }
-    nav a:hover {
-      color: var(--accent);
-    }
-    .logo {
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-    }
-    main {
-      padding: 40px 0 80px;
-    }
-    section {
-      padding: 60px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-    section:last-of-type {
-      border-bottom: none;
-    }
-    .section-title {
-      font-size: 1.25rem;
-      margin-bottom: 20px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+
+    nav a {
       color: var(--muted);
+      transition: color 0.2s;
     }
+
+    nav a:hover, nav a.active {
+      color: var(--gold);
+    }
+
+    main {
+      padding-bottom: 80px;
+    }
+
+    .page-section {
+      display: none;
+      padding: 40px 0 80px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .section-heading {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 36px;
+      color: var(--text);
+    }
+
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-      gap: 40px;
-      align-items: center;
-      padding-top: 20px;
+      grid-template-columns: 1.65fr 1fr;
+      gap: 48px;
+      align-items: start;
+      padding-top: 40px;
     }
-    .hero h1 {
-      font-size: 2.2rem;
-      margin-bottom: 12px;
+
+    .hero-name {
+      font-size: 46px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      background: linear-gradient(130deg, var(--text) 55%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .hero p {
+
+    .hero-tagline {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 22px;
+    }
+
+    .hero-bio {
       color: var(--muted);
-      margin-bottom: 18px;
+      font-size: 14px;
+      line-height: 1.85;
+      margin-bottom: 26px;
     }
-    .tagline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(242, 95, 92, 0.1);
-      color: var(--accent);
-      font-size: 0.8rem;
-      margin-bottom: 12px;
-    }
+
     .chip-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 8px;
     }
+
     .chip {
+      border: 1px solid var(--gold-border);
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 4px 10px;
-      font-size: 0.75rem;
+      padding: 5px 14px;
+      font-size: 12px;
       color: var(--muted);
+      background: var(--gold-dim);
     }
+
     .hero-card {
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 20px;
-      background: radial-gradient(circle at 0 0, rgba(242, 95, 92, 0.3), transparent 55%);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--gold-border);
+      padding: 26px;
+      background: linear-gradient(140deg, rgba(233, 185, 27, 0.08) 0%, transparent 65%);
+      box-shadow: 0 28px 56px rgba(0, 0, 0, 0.55);
     }
-    .hero-card-title {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 10px;
+
+    .hero-card-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
     }
-    .hero-card-main {
-      font-size: 1rem;
-      margin-bottom: 10px;
+
+    .hero-card-body {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 14px;
     }
+
     .hero-card-sub {
-      font-size: 0.8rem;
+      font-size: 13px;
       color: var(--muted);
+      line-height: 1.75;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 16px;
-      background: rgba(255, 255, 255, 0.01);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .card-tag {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .card-title {
-      font-size: 1rem;
-      font-weight: 500;
-    }
-    .card-meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
+
     .embed-wrapper {
       position: relative;
       width: 100%;
       padding-top: 56.25%;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
       background: #111;
-      margin-top: 6px;
+      border: 1px solid var(--line);
     }
-    .embed-wrapper iframe {
+
+    .embed-wrapper iframe,
+    .embed-wrapper video {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
       border: 0;
+      background: #000;
     }
-    .audio-list {
+
+    .embed-caption {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .soundcloud-wrapper {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--gold-border);
+      background: var(--panel);
+    }
+
+    .music-link-row {
+      margin-top: 16px;
+      font-size: 13px;
+    }
+
+    .music-link-row a {
+      color: var(--gold);
+      transition: opacity 0.2s;
+    }
+
+    .music-link-row a:hover {
+      opacity: 0.75;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .work-card {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px;
+      border-radius: 18px;
+      border: 1px solid var(--gold-border);
+      padding: 26px;
+      background: var(--panel);
+      transition: border-color 0.22s, transform 0.22s;
+      cursor: pointer;
     }
-    .audio-item-title {
-      font-size: 0.95rem;
+
+    .work-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
     }
-    audio {
-      width: 100%;
-      margin-top: 4px;
+
+    .work-card-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
     }
-    .contact-list {
+
+    .work-card-title {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .work-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .work-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--gold);
+      margin-top: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .work-card-cta::after {
+      content: "→";
+    }
+
+    .contact-grid {
       display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      font-size: 0.9rem;
+      flex-direction: column;
+      gap: 22px;
     }
-    .contact-item span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.75rem;
-      margin-bottom: 2px;
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
+
+    .contact-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
     .contact-item a {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    footer {
-      padding: 20px 0 40px;
-      font-size: 0.8rem;
+      font-size: 14px;
       color: var(--muted);
-      text-align: center;
+      transition: color 0.2s;
     }
+
+    .contact-item a:hover {
+      color: var(--text);
+    }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--header-footer);
+      border-top: 1px solid var(--line);
+    }
+
+    .bio-photos-panel {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 60px;
+      padding: 26px;
+      background: var(--panel);
+      border-radius: 18px;
+      border: 1px solid var(--gold-border);
+    }
+
+    .bio-photo {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 12px;
+      filter: grayscale(100%) contrast(1.1) brightness(0.5);
+      transition: filter 0.4s ease;
+    }
+
+    .bio-photo:hover {
+      filter: grayscale(0%) contrast(1) brightness(1);
+    }
+
+    .tabs-nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+      border-color: var(--gold-border);
+    }
+
+    .tab-btn.active {
+      color: var(--gold);
+      background: var(--gold-dim);
+      border-color: var(--gold);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
     @media (max-width: 768px) {
       .hero {
         grid-template-columns: 1fr;
+        gap: 32px;
+        padding-top: 28px;
       }
-      header {
-        position: static;
+
+      .bio-photos-panel {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 16px;
+      }
+
+      .bio-photo {
+        height: 320px;
+      }
+
+      .hero-name {
+        font-size: 34px;
+      }
+
+      nav ul {
+        gap: 14px;
+        font-size: 12px;
+        flex-wrap: wrap;
+      }
+
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 60px 0;
       }
     }
   </style>
 </head>
+
 <body>
+
   <header>
     <div class="container">
       <nav>
-        <div class="logo">YOUR NAME</div>
+        <div class="logo">Yizzy's Sonic Space</div>
         <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#reel">Demo Reel</a></li>
-          <li><a href="#music">Music</a></li>
-          <li><a href="#performance">Performance</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#bio" class="nav-link active" onclick="openPage(event, 'bio')">Bio</a></li>
+          <li><a href="#reel" class="nav-link" onclick="openPage(event, 'reel')">Sound Design</a></li>
+          <li><a href="#music" class="nav-link" onclick="openPage(event, 'music')">Music</a></li>
+          <li><a href="#performance" class="nav-link" onclick="openPage(event, 'performance')">Performance</a></li>
+          <li><a href="#artwork" class="nav-link" onclick="openPage(event, 'artwork')">Art Work</a></li>
+          <li><a href="#contact" class="nav-link" onclick="openPage(event, 'contact')">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- Hero -->
-    <section id="home">
+
+    <section id="bio" class="page-section active">
       <div class="container hero">
         <div>
-          <div class="tagline">Performer · Music Creator · Storyteller</div>
-          <h1>Your Name</h1>
-          <p>
-            A short bio here. For example: I am a performer and music creator working across
-            theatre, film, and interactive media, focusing on emotional storytelling through sound and movement.
+          <div class="hero-tagline">Performer · Music Creator · Storyteller</div>
+          <div class="hero-name">Yizzy</div>
+          <p class="hero-bio">
+            Junyi Zhan (artist name "Yizzy") is a sound designer, electronic music producer, and young
+            guqin performer based on the U.S. East Coast. He graduated from Berklee College of Music
+            with a concentration in Electronic Production and Sound Design. His work centers on
+            experimental electronic and Chinese fusion aesthetics, exploring the relationship between
+            traditional timbre, contemporary sound design, and minimal electronic structures.
+            His compositions and sound works have been exhibited at international platforms including
+            the 2023 TIDE London Contemporary Art Exhibition and the 27th International Multimedial
+            Art Festival (IMAF) 2025.
           </p>
           <div class="chip-row">
-            <div class="chip">Acting / Performance</div>
-            <div class="chip">Music Production</div>
             <div class="chip">Sound Design</div>
+            <div class="chip">Electronic Music</div>
+            <div class="chip">Guqin Performance</div>
+            <div class="chip">Music Production</div>
           </div>
         </div>
+
         <div class="hero-card">
-          <div class="hero-card-title">Latest Highlight</div>
-          <div class="hero-card-main">
-            Demo reel featuring selected scenes from theatre, film, and immersive experiences.
+          <div class="hero-card-label">Background</div>
+          <div class="hero-card-body">
+            Trained in the Guangling guqin tradition under Tang Naiyang, Yizzy continues to draw
+            from diverse schools and contemporary practices in performance and sound research.
           </div>
           <div class="hero-card-sub">
-            Scroll down to watch, or jump directly to the demo reel section below.
+            He has collaborated and shared the stage with artists including Yazhi Guo,
+            Yimiao Chen, and the Budapest String Orchestra, presenting works across the U.S. East Coast.
           </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="bio-photos-panel">
+          <img src="media/photo1.jpg" alt="Bio Photo 1" class="bio-photo">
+          <img src="media/photo2.jpg" alt="Bio Photo 2" class="bio-photo">
+          <img src="media/photo3.jpg" alt="Bio Photo 3" class="bio-photo">
         </div>
       </div>
     </section>
 
-    <!-- Demo Reel -->
-    <section id="reel">
+    <section id="reel" class="page-section">
       <div class="container">
-        <h2 class="section-title">Demo Reel</h2>
-        <div class="card">
-          <div class="card-tag">Video · 3–5 min</div>
-          <div class="card-title">Acting & Performance Demo Reel</div>
-          <div class="card-meta">2025 · Theatre · Film · Immersive</div>
-          <div class="embed-wrapper">
-            <!-- 把下面 src 的链接换成你自己的 YouTube / Vimeo 地址 -->
-            <iframe
-              src="https://www.youtube.com/embed/VIDEO_ID_HERE"
-              title="Demo Reel"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
+        <div class="section-label">Sound Design</div>
+        <div class="section-heading">Projects & Demo Reel</div>
+        <!-- Tab Navigation -->
+        <div class="tabs-nav">
+          <button class="tab-btn active" onclick="openTab(event, 'tab-demo-reel')">Demo Reel</button>
+          <button class="tab-btn" onclick="openTab(event, 'tab-sound-redesign')">Sound Redesign</button>
+          <button class="tab-btn" onclick="openTab(event, 'tab-project')">Project</button>
         </div>
-      </div>
-    </section>
 
-    <!-- Music -->
-    <section id="music">
-      <div class="container">
-        <h2 class="section-title">Music</h2>
-        <div class="audio-list">
-          <div>
-            <div class="audio-item-title">Track Title 01 — Short Description</div>
-            <div class="card-meta">Film score / emotional · 2025</div>
-            <!-- 如果你有 mp3 文件，上传到仓库比如 /media/track1.mp3 然后改成对应路径 -->
-            <audio controls src="media/track1.mp3">
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div>
-            <div class="audio-item-title">Track Title 02 — Short Description</div>
-            <div class="card-meta">Sound design / experimental · 2025</div>
-            <audio controls src="media/track2.mp3">
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <!-- 如果你用 SoundCloud，可以改成嵌入 iframe -->
-          <!--
-          <div>
-            <div class="audio-item-title">Track Title — SoundCloud</div>
-            <div class="card-meta">Electronic / ambient · 2025</div>
-            <div class="embed-wrapper" style="padding-top: 0; height: 166px;">
-              <iframe
-                width="100%" height="166"
-                scrolling="no" frameborder="no"
-                src="YOUR_SOUNDCLOUD_EMBED_URL_HERE">
-              </iframe>
+        <!-- Tab Content: Demo Reel -->
+        <div id="tab-demo-reel" class="tab-content active">
+          <div class="works-grid" style="grid-template-columns: 1fr;">
+            <div>
+              <div class="embed-wrapper">
+                <video controls src="media/demo_reel_2026.mp4">
+                  您的浏览器不支持 HTML5 视频。
+                </video>
+              </div>
+              <div class="embed-caption">
+                Sound Design Demo Reel
+              </div>
             </div>
           </div>
-          -->
         </div>
-      </div>
-    </section>
 
-    <!-- Performance -->
-    <section id="performance">
-      <div class="container">
-        <h2 class="section-title">Performance</h2>
-        <div class="grid">
-          <div class="card">
-            <div class="card-tag">Theatre</div>
-            <div class="card-title">Project Title 01</div>
-            <div class="card-meta">Role · Venue · Year</div>
-            <div class="embed-wrapper">
-              <iframe
-                src="https://www.youtube.com/embed/ANOTHER_VIDEO_ID"
-                title="Performance Clip"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
+        <!-- Tab Content: Sound Redesign -->
+        <div id="tab-sound-redesign" class="tab-content">
+          <div class="works-grid">
+            <div>
+              <div class="embed-wrapper">
+                <video controls src="media/Kongfu_panda.mp4">
+                  您的浏览器不支持 HTML5 视频。
+                </video>
+              </div>
+              <div class="embed-caption">
+                Kung Fu Panda · Sound Redesign
+              </div>
+            </div>
+            <div>
+              <div class="embed-wrapper">
+                <video controls src="media/shadow.mp4">
+                  您的浏览器不支持 HTML5 视频。
+                </video>
+              </div>
+              <div class="embed-caption">
+                Shadow · Sound Redesign
+              </div>
             </div>
           </div>
+        </div>
 
-          <div class="card">
-            <div class="card-tag">Film</div>
-            <div class="card-title">Project Title 02</div>
-            <div class="card-meta">Role · Director · Year</div>
-            <p class="card-meta">
-              One–two line description of the scene or project. What is special about this performance?
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-tag">Immersive / Live</div>
-            <div class="card-title">Project Title 03</div>
-            <div class="card-meta">Devised / Immersive · Year</div>
-            <p class="card-meta">
-              Short description of the experience, your role, and the type of audience.
-            </p>
+        <!-- Tab Content: Project -->
+        <div id="tab-project" class="tab-content">
+          <div class="works-grid" style="grid-template-columns: 1fr;">
+            <div>
+              <div class="embed-wrapper">
+                <iframe src="https://www.youtube.com/embed/00mFUB37Bik" title="Myth of Lumi"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+              </div>
+              <div class="embed-caption">
+                Myth of Lumi · Game Music & Sound
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact">
+    <section id="music" class="page-section">
       <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <div class="contact-list">
+        <div class="section-label">Music</div>
+        <div class="section-heading">Tracks & Productions</div>
+        <div class="soundcloud-wrapper">
+          <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/johnny-zhan&color=%23e9b91b&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>
+        </div>
+        <div class="music-link-row">
+          Full profile on SoundCloud →
+          <a href="https://soundcloud.com/johnny-zhan" target="_blank" rel="noopener">
+            soundcloud.com/johnny-zhan
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="performance" class="page-section">
+      <div class="container">
+        <div class="section-label">Performance</div>
+        <div class="section-heading">Live & Exhibitions</div>
+
+        <div class="works-grid">
+          <a class="work-card" href="https://youtu.be/q6byMRGv9uo?si=6fVO9XolqDdj52Pm" target="_blank" rel="noopener">
+            <div class="work-card-tag">Electronic / Experimental</div>
+            <div class="work-card-title">IMAF 2025</div>
+            <div class="work-card-desc">
+              Exhibited at the 27th International Multimedial Art Festival (IMAF) 2025. Sound Design Work by Yizzy.
+            </div>
+            <span class="work-card-cta">Watch on YouTube</span>
+          </a>
+
+          <a class="work-card" href="https://youtu.be/aeAeApuMCyU?si=4wNp6NEes8xzfmph" target="_blank" rel="noopener">
+            <div class="work-card-tag">Guqin Performance</div>
+            <div class="work-card-title">神人畅 (Shen Ren Chang)</div>
+            <div class="work-card-desc">
+              Traditional Guqin performance showcasing classical techniques and aesthetic expression.
+            </div>
+            <span class="work-card-cta">Watch on YouTube</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="artwork" class="page-section">
+      <div class="container">
+        <div class="section-label">Art Work</div>
+        <div class="section-heading">Selected Projects</div>
+        <div class="works-grid">
+
+          <a class="work-card" href="https://www.imdb.com/title/tt28002849/?ref_=nm_ov_bio_lk" target="_blank" rel="noopener">
+            <div class="work-card-tag">Film · Sound Design</div>
+            <div class="work-card-title">TIDE</div>
+            <div class="work-card-desc">
+              Exhibited at the 2023 TIDE London Contemporary Art Exhibition. An immersive work
+              exploring the intersection of sound, motion, and visual narrative.
+            </div>
+            <span class="work-card-cta">View on IMDB</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="page-section">
+      <div class="container">
+        <div class="section-label">Get in Touch</div>
+        <div class="section-heading">Contact</div>
+        <div class="contact-grid">
           <div class="contact-item">
-            <span>Email</span>
-            <a href="mailto:your.email@example.com">your.email@example.com</a>
+            <span class="contact-label">Email</span>
+            <a href="mailto:junyizhan123@gmail.com">junyizhan123@gmail.com</a>
           </div>
           <div class="contact-item">
-            <span>Instagram</span>
-            <a href="https://instagram.com/yourhandle" target="_blank">@yourhandle</a>
+            <span class="contact-label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/junyi-zhan-5a6b74262/" target="_blank"
+              rel="noopener">linkedin.com/in/junyi-zhan-5a6b74262/</a>
           </div>
           <div class="contact-item">
-            <span>Other</span>
-            <a href="https://linktr.ee/yourlink" target="_blank">Linktree / SoundCloud / etc.</a>
+            <span class="contact-label">SoundCloud</span>
+            <a href="https://soundcloud.com/johnny-zhan" target="_blank" rel="noopener">soundcloud.com/johnny-zhan</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Instagram</span>
+            <a href="https://www.instagram.com/Johnny_Zhan12" target="_blank" rel="noopener">@Johnny_Zhan12</a>
           </div>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer>
-    © <span id="year"></span> Your Name. All rights reserved.
+    <div class="container">
+      © <span id="year"></span> Yizzy's Sonic Space. All rights reserved.
+    </div>
   </footer>
 
   <script>
-    // 自动显示当前年份
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    function openPage(evt, pageId) {
+      evt.preventDefault();
+      
+      var pages = document.getElementsByClassName("page-section");
+      for (var i = 0; i < pages.length; i++) {
+        pages[i].classList.remove("active");
+        
+        var videos = pages[i].getElementsByTagName("video");
+        for (var j = 0; j < videos.length; j++) {
+          videos[j].pause();
+        }
+        
+        var iframes = pages[i].getElementsByTagName("iframe");
+        for (var k = 0; k < iframes.length; k++) {
+          var src = iframes[k].src;
+          iframes[k].src = src; 
+        }
+      }
+
+      var navLinks = document.getElementsByClassName("nav-link");
+      for (var i = 0; i < navLinks.length; i++) {
+        navLinks[i].classList.remove("active");
+      }
+
+      document.getElementById(pageId).classList.add("active");
+      evt.currentTarget.classList.add("active");
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openTab(evt, tabId) {
+      var tabContents = document.getElementsByClassName("tab-content");
+      for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+        
+        var videos = tabContents[i].getElementsByTagName("video");
+        for (var j = 0; j < videos.length; j++) {
+          videos[j].pause();
+        }
+        
+        var iframes = tabContents[i].getElementsByTagName("iframe");
+        for (var k = 0; k < iframes.length; k++) {
+          var src = iframes[k].src;
+          iframes[k].src = src; 
+        }
+      }
+
+      var tabBtns = document.getElementsByClassName("tab-btn");
+      for (var i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].classList.remove("active");
+      }
+
+      document.getElementById(tabId).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
   </script>
+
 </body>
+
 </html>
