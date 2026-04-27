@@ -677,7 +677,7 @@
     document.getElementById("year").textContent = new Date().getFullYear();
 
     function openPage(evt, pageId) {
-      evt.preventDefault();
+      if (evt) evt.preventDefault();
       
       var pages = document.getElementsByClassName("page-section");
       for (var i = 0; i < pages.length; i++) {
@@ -698,10 +698,16 @@
       var navLinks = document.getElementsByClassName("nav-link");
       for (var i = 0; i < navLinks.length; i++) {
         navLinks[i].classList.remove("active");
+        if (navLinks[i].getAttribute("href") === "#" + pageId) {
+          navLinks[i].classList.add("active");
+        }
       }
 
-      document.getElementById(pageId).classList.add("active");
-      evt.currentTarget.classList.add("active");
+      var targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add("active");
+        if (evt) window.history.pushState(null, null, '#' + pageId);
+      }
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -731,6 +737,23 @@
       document.getElementById(tabId).classList.add("active");
       evt.currentTarget.classList.add("active");
     }
+    window.addEventListener('DOMContentLoaded', function() {
+      var hash = window.location.hash.substring(1);
+      var validPages = ['bio', 'reel', 'music', 'performance', 'artwork', 'contact'];
+      if (hash && validPages.includes(hash)) {
+        openPage(null, hash);
+      }
+    });
+
+    window.addEventListener('popstate', function() {
+      var hash = window.location.hash.substring(1);
+      var validPages = ['bio', 'reel', 'music', 'performance', 'artwork', 'contact'];
+      if (hash && validPages.includes(hash)) {
+        openPage(null, hash);
+      } else {
+        openPage(null, 'bio');
+      }
+    });
   </script>
 
 </body>
