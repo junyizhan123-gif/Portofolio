@@ -8,15 +8,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #1c1c1c;
-      --header-footer: #090909;
-      --panel: #262626;
-      --gold: #e9b91b;
-      --gold-dim: rgba(233, 185, 27, 0.1);
-      --gold-border: rgba(233, 185, 27, 0.18);
-      --text: #e0e0e0;
-      --muted: #8c8c8c;
-      --line: rgba(255, 255, 255, 0.05);
+      /* Warm Minimalist Studio System (Organic Charcoal & Soft Honey Champagne) */
+      --bg: #111113;
+      --header-footer: rgba(17, 17, 19, 0.95);
+      --panel: #1a1a1e;
+      --panel-elevated: #222227;
+      
+      /* Soft Warm Honey Champagne (Balanced warmth, gentle and refined) */
+      --accent: #dfbe82;
+      --accent-bright: #f5eedb;
+      --accent-dim: rgba(223, 190, 130, 0.09);
+      --accent-border: rgba(223, 190, 130, 0.22);
+      --accent-glow: rgba(223, 190, 130, 0.18);
+
+      /* Compatible aliases */
+      --gold: var(--accent);
+      --gold-dim: var(--accent-dim);
+      --gold-border: var(--accent-border);
+      --silver: var(--accent);
+
+      /* Warm Ivory & Stone Typography */
+      --text: #f6f3ee;
+      --muted: #9b958c;
+      --line: rgba(255, 245, 230, 0.07);
     }
 
     * {
@@ -133,7 +147,7 @@
       font-weight: 600;
       letter-spacing: -0.02em;
       margin-bottom: 6px;
-      background: linear-gradient(130deg, var(--text) 55%, var(--gold) 100%);
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent) 72%, #a88448 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -172,7 +186,7 @@
       border-radius: 20px;
       border: 1px solid var(--gold-border);
       padding: 26px;
-      background: linear-gradient(140deg, rgba(233, 185, 27, 0.08) 0%, transparent 65%);
+      background: linear-gradient(140deg, rgba(223, 190, 130, 0.09) 0%, transparent 65%);
       box-shadow: 0 28px 56px rgba(0, 0, 0, 0.55);
     }
 
@@ -205,6 +219,8 @@
       overflow: hidden;
       background: #111;
       border: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transition: border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
     .embed-wrapper iframe,
@@ -215,12 +231,14 @@
       height: 100%;
       border: 0;
       background: #000;
+      object-fit: contain;
     }
 
     .embed-caption {
       margin-top: 14px;
       font-size: 13px;
       color: var(--muted);
+      transition: color 0.3s ease;
     }
 
     .soundcloud-wrapper {
@@ -242,6 +260,79 @@
 
     .music-link-row a:hover {
       opacity: 0.75;
+    }
+
+    /* Accordion Layout for Videos & Projects */
+    .video-accordion,
+    .works-accordion {
+      display: flex;
+      gap: 24px;
+      width: 100%;
+      align-items: stretch;
+    }
+
+    .video-accordion-item {
+      flex: 1 1 0%;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      transition: flex 0.55s cubic-bezier(0.25, 1, 0.35, 1), transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    /* Multi-item accordion expansion on hover (Subtle ~1/5th amplitude) */
+    .video-accordion:hover .video-accordion-item {
+      flex: 0.92 1 0%;
+      opacity: 0.92;
+    }
+
+    .video-accordion .video-accordion-item:hover {
+      flex: 1.2 1 0%;
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    .video-accordion .video-accordion-item:only-child,
+    .video-accordion:hover .video-accordion-item:only-child {
+      flex: 1 1 0%;
+      opacity: 1;
+    }
+
+    .video-accordion .video-accordion-item:only-child:hover {
+      transform: translateY(-2px);
+    }
+
+    .video-accordion-item:hover .embed-wrapper {
+      border-color: var(--gold);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 24px rgba(223, 190, 130, 0.18);
+    }
+
+    .video-accordion-item:hover .embed-caption {
+      color: var(--text);
+    }
+
+    /* Works / Performance cards accordion */
+    .works-accordion .work-card {
+      flex: 1 1 0%;
+      min-width: 0;
+      transition: flex 0.55s cubic-bezier(0.25, 1, 0.35, 1), border-color 0.25s, transform 0.25s, opacity 0.35s;
+    }
+
+    .works-accordion:hover .work-card {
+      flex: 0.92 1 0%;
+      opacity: 0.92;
+    }
+
+    .works-accordion .work-card:hover {
+      flex: 1.18 1 0%;
+      opacity: 1;
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .works-accordion .work-card:only-child,
+    .works-accordion:hover .work-card:only-child {
+      flex: 1 1 0%;
+      opacity: 1;
     }
 
     .works-grid {
@@ -431,6 +522,24 @@
         grid-template-columns: 1fr;
       }
 
+      .video-accordion,
+      .works-accordion {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .video-accordion:hover .video-accordion-item,
+      .video-accordion .video-accordion-item:hover,
+      .video-accordion .video-accordion-item:only-child,
+      .works-accordion:hover .work-card,
+      .works-accordion .work-card:hover,
+      .works-accordion .work-card:only-child {
+        flex: 1 1 auto;
+        width: 100%;
+        opacity: 1;
+        transform: none;
+      }
+
       section {
         padding: 60px 0;
       }
@@ -516,15 +625,15 @@
 
         <!-- Tab Content: Demo Reel -->
         <div id="tab-demo-reel" class="tab-content active">
-          <div class="works-grid" style="grid-template-columns: 1fr;">
-            <div>
+          <div class="video-accordion">
+            <div class="video-accordion-item">
               <div class="embed-wrapper">
-                <iframe src="https://www.youtube.com/embed/lO64B1LHJHE" title="Sound Design Demo Reel"
+                <iframe src="https://www.youtube.com/embed/p7_lgGl2QGU" title="Sound Design Demo Reel 2026"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen></iframe>
               </div>
               <div class="embed-caption">
-                Sound Design Demo Reel
+                Sound Design Demo Reel 2026
               </div>
             </div>
           </div>
@@ -532,8 +641,8 @@
 
         <!-- Tab Content: Sound Redesign -->
         <div id="tab-sound-redesign" class="tab-content">
-          <div class="works-grid">
-            <div>
+          <div class="video-accordion">
+            <div class="video-accordion-item">
               <div class="embed-wrapper">
                 <iframe src="https://www.youtube.com/embed/qV6gNJfbTHU" title="Kung Fu Panda Sound Redesign"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -543,7 +652,7 @@
                 Kung Fu Panda · Sound Redesign
               </div>
             </div>
-            <div>
+            <div class="video-accordion-item">
               <div class="embed-wrapper">
                 <iframe src="https://www.youtube.com/embed/PyxYRS5d2xg" title="Shadow Sound Redesign"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -558,8 +667,8 @@
 
         <!-- Tab Content: Project -->
         <div id="tab-project" class="tab-content">
-          <div class="works-grid" style="grid-template-columns: 1fr;">
-            <div>
+          <div class="video-accordion">
+            <div class="video-accordion-item">
               <div class="embed-wrapper">
                 <iframe src="https://www.youtube.com/embed/00mFUB37Bik" title="Myth of Lumi"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -580,7 +689,7 @@
         <div class="section-heading">Tracks & Productions</div>
         <div class="soundcloud-wrapper">
           <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/johnny-zhan&color=%23e9b91b&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/johnny-zhan&color=%23dfbe82&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>
         </div>
         <div class="music-link-row">
           Full profile on SoundCloud →
@@ -596,7 +705,7 @@
         <div class="section-label">Performance</div>
         <div class="section-heading">Live & Exhibitions</div>
 
-        <div class="works-grid">
+        <div class="works-accordion">
           <a class="work-card" href="https://youtu.be/q6byMRGv9uo?si=6fVO9XolqDdj52Pm" target="_blank" rel="noopener">
             <div class="work-card-tag">Electronic / Experimental</div>
             <div class="work-card-title">IMAF 2025</div>
@@ -623,7 +732,7 @@
       <div class="container">
         <div class="section-label">Art Work</div>
         <div class="section-heading">Selected Projects</div>
-        <div class="works-grid">
+        <div class="works-accordion">
 
           <a class="work-card" href="https://www.imdb.com/title/tt28002849/?ref_=nm_ov_bio_lk" target="_blank" rel="noopener">
             <div class="work-card-tag">Film · Sound Design</div>

@@ -7,15 +7,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #1c1c1c;
-      --header-footer: #090909;
-      --panel: #262626;
-      --gold: #e9b91b;
-      --gold-dim: rgba(233, 185, 27, 0.1);
-      --gold-border: rgba(233, 185, 27, 0.18);
-      --text: #e0e0e0;
-      --muted: #8c8c8c;
-      --line: rgba(255, 255, 255, 0.05);
+      /* Warm Minimalist Studio System (Organic Charcoal & Soft Honey Champagne) */
+      --bg: #111113;
+      --header-footer: rgba(17, 17, 19, 0.95);
+      --panel: #1a1a1e;
+      --panel-elevated: #222227;
+      
+      /* Soft Warm Honey Champagne (Balanced warmth, gentle and refined) */
+      --accent: #dfbe82;
+      --accent-bright: #f5eedb;
+      --accent-dim: rgba(223, 190, 130, 0.09);
+      --accent-border: rgba(223, 190, 130, 0.22);
+      --accent-glow: rgba(223, 190, 130, 0.18);
+
+      /* Compatible aliases */
+      --gold: var(--accent);
+      --gold-dim: var(--accent-dim);
+      --gold-border: var(--accent-border);
+      --silver: var(--accent);
+
+      /* Warm Ivory & Stone Typography */
+      --text: #f6f3ee;
+      --muted: #9b958c;
+      --line: rgba(255, 245, 230, 0.07);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -87,6 +101,37 @@
       font-weight: 500;
       margin-bottom: 36px;
       color: var(--text);
+    }
+
+    .works-accordion {
+      display: flex;
+      gap: 24px;
+      width: 100%;
+      align-items: stretch;
+    }
+
+    .works-accordion .work-card {
+      flex: 1 1 0%;
+      min-width: 0;
+      transition: flex 0.55s cubic-bezier(0.25, 1, 0.35, 1), border-color 0.25s, transform 0.25s, opacity 0.35s;
+    }
+
+    .works-accordion:hover .work-card {
+      flex: 0.92 1 0%;
+      opacity: 0.92;
+    }
+
+    .works-accordion .work-card:hover {
+      flex: 1.18 1 0%;
+      opacity: 1;
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .works-accordion .work-card:only-child,
+    .works-accordion:hover .work-card:only-child {
+      flex: 1 1 0%;
+      opacity: 1;
     }
 
     .works-grid {
@@ -178,7 +223,7 @@
       <div class="container">
         <div class="section-label">Art Work</div>
         <div class="section-heading">Selected Projects</div>
-        <div class="works-grid">
+        <div class="works-accordion">
 
           <a class="work-card" href="https://www.imdb.com/title/tt28002849/?ref_=nm_ov_bio_lk" target="_blank" rel="noopener">
             <div class="work-card-tag">Film · Sound Design</div>
